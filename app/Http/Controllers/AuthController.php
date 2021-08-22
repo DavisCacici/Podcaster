@@ -17,7 +17,8 @@ class AuthController extends Controller
         if(!empty($user))
         {
             session_start();
-            AuthController::$user = $user;
+            $_SESSION["name"] = $name;
+            $_SESSION["password"] = $password;
             return view("dashboard", compact("user"));
         }
         else
@@ -40,13 +41,14 @@ class AuthController extends Controller
         ]);
 
         session_start();
-        AuthController::$user = $user;
+        $_SESSION["name"] = $name;
+        $_SESSION["password"] = $password;
         return view("dashboard", compact("user"));
     }
 
     function logout()
     {
         session_destroy();
-        AuthController::$user = null;
+        $_SESSION = array();
     }
 }

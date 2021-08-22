@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
   <head>
     <title>Title</title>
     <!-- Required meta tags -->
@@ -10,21 +10,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-    <form action="/register" method="post">
-        <input type="text" name="name" placeholder="Name">
-        <input type="email" name="email" placeholder="Email">
-        <input type="password" name="password" placeholder="Password" id="pass1">
-        <input type="password" name="confermapassword" placeholder="Conferma Password" id="pass2">
-        <button type="submit">Registrati</button>
-    </form>
-    <script>
-        var pass1 = document.getElementById('pass1');
-        var pass2 = document.getElementById('pass2');
-        if(pass1 == pass2)
-        {
-            $message = "le password non corrispondono";
-        }
-    </script>
+      <h1>Home</h1>
+      <a href="{{url('/login')}}">Login</a>
+      <a href="{{url('/register')}}">Registrati</a>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

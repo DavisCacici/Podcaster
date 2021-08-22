@@ -17,7 +17,7 @@ class Auth
      */
     public function handle(Request $request, Closure $next)
     {
-        if(empty(AuthController::$user)) abort(401);
-        return $next($request);
+        if(empty($_SESSION)) return $next($request);
+        else session_start();
     }
 }
