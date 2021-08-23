@@ -17,15 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/login', function () {
-    return view('login');
-});
-Route::post('/login', [AuthController::class, 'login']);
-Route::get('/register', function () {
-    return view('register');
-});
-Route::post('/register', [AuthController::class, 'register']);
-Route::get('/logout',[AuthController::class, 'logout']);
-Route::get("/dashboard", function() {
-    return view("dashboard");
-})->middleware("auth");
+
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
