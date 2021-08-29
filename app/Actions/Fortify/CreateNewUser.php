@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use Mockery\Undefined;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -27,7 +28,12 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
 
-        $role = $input['role'] ? '2' : '1';
+        // dd($input);
+        $role = 1;
+        if(in_array('role', $input))
+        {
+            if($input['role'] == 'on') $role = 2;
+        }
 
         return User::create([
             'name' => $input['name'],

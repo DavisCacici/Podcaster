@@ -30,8 +30,17 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="podcaster" value="{{ __('Podcaster') }}"/>
+                <x-jet-label for="podcaster" value="{{ __('Podcaster?') }}"/>
                 <x-jet-checkbox name="role" id="podcaster"/>
+                {{-- <select name="role" id="podcaster">
+                    <option value="2">si</option>
+                    <option value="1">no</option>
+                </select> --}}
+
+                {{--
+                <input type="radio" name="si" value="si"/>
+                <input type="radio" name="no" value="no"/> --}}
+
             </div>
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
