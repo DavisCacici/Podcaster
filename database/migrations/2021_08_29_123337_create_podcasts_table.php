@@ -16,9 +16,10 @@ class CreatePodcastsTable extends Migration
         Schema::create('podcasts', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("descrizione");
-            $table->foreignId("userid")->constrained("user");
-            $table->binary("file");
+            $table->string("description");
+            $table->string("ext");
+            $table->string("path");
+            $table->foreignId("userid")->constrained("user"); 
             $table->timestamps();
         });
     }

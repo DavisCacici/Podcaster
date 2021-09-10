@@ -10,8 +10,9 @@ class Podcast extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'descrizione',
-        'userid',
-        'file',
+        'description',
+        'ext',
+        'path',
+        'userid', 
     ];
 }

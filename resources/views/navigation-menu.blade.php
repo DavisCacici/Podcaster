@@ -79,6 +79,11 @@
                                     <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                 </button>
                             @else
+                                @can("podcaster")
+                                <a type="button" href="{{ route('carica')}}" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
+                                    {{'Carica'}}
+                                </a>
+                                @endcan
                                 <span class="inline-flex rounded-md">
                                     <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
                                         {{ Auth::user()->name }}
@@ -98,6 +103,10 @@
                             </div>
 
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                                {{ __('Setting') }}
+                            </x-jet-dropdown-link>
+
+                            <x-jet-dropdown-link href="{{ route('profile') }}">
                                 {{ __('Profile') }}
                             </x-jet-dropdown-link>
 

@@ -8,22 +8,22 @@ use App\Models\User;
 use App\Models\Podcast;
 use Dotenv\Validator;
 use Illuminate\Auth\Events\Validated;
-
+use Livewire\WithFileUploads;
 class CaricamentoPocast extends Component
 {
-    public function handler(Request $request, User $user)
-    {
-        $file = $request['file'];
-        $descrizione = $request['descrizione'];
-        $name = $request['name'];
-        Podcast::create([
-            "name" => $name,
-            "descrizione" => $descrizione,
-            'file' => $file,
-            'userid' => $user->id
+    use WithFileUploads;
+    public $file;
+    public $name = "";
+    public $descrizione = "";
+    public function handler()
+    {        
+        $data = $this->validate([
+            'file' => 'required',
+            'name' => 'required',
+            'descrizione' => 'required',
         ]);
 
-        return redirect("dashboard");
+
 
     }
     public function render()

@@ -26,6 +26,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::get('/carica', function() {
     return view('carica');
-})->middleware('can:podcaster');
+})->middleware('can:podcaster')->name('carica');
 
-// Route::post('/carica', [PodcastController::class, 'carica']);
+Route::post('/carica', [PodcastController::class, 'carica']);
+
+Route::get('/profile', function(){
+    return view('profile');
+})->name('profile');

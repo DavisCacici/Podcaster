@@ -30,10 +30,7 @@ class CreateNewUser implements CreatesNewUsers
 
         // dd($input);
         $role = 1;
-        if(in_array('role', $input))
-        {
-            if($input['role'] == 'on') $role = 2;
-        }
+        if(!empty($input['role']) && $input['role'] === 'on') $role = 2; 
 
         return User::create([
             'name' => $input['name'],
