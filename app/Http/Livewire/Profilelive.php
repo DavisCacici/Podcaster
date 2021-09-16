@@ -6,14 +6,17 @@ use Livewire\Component;
 use App\Models\Podcast;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 class Profilelive extends Component
 {
 
     public function render()
     {
-        $podcast = Podcast::where("userid", Auth::id());
-        $podcast = (object)$podcast;
-        var_dump($podcast);
-        return view('livewire.profilelive', compact('podcast'));
+        $file = Podcast::where('userid', Auth::id())->first();
+        // dd($file);
+        $podcast = Storage::url($file->path);
+        // dd($podcast);
+        return view('livewire.profilelive', compact('file', 'podcast'));
     }
 }

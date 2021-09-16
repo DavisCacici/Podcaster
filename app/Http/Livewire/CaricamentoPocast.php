@@ -16,15 +16,12 @@ class CaricamentoPocast extends Component
     public $name = "";
     public $descrizione = "";
     public function handler()
-    {        
+    {
         $data = $this->validate([
             'file' => 'required',
             'name' => 'required',
             'descrizione' => 'required',
         ]);
-
-
-
     }
     public function render()
     {

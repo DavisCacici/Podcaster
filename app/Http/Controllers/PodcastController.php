@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Podcast;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 
 class PodcastController extends Controller
 {
@@ -14,7 +15,6 @@ class PodcastController extends Controller
 
     function carica(Request $request)
     {
-        // dd($request->all());
         $user = Auth::id();
         $file = $request->file('file');
         $descrizione = $request['descrizione'];
@@ -22,11 +22,12 @@ class PodcastController extends Controller
         Podcast::create([
             "name" => $name,
             "description" => $descrizione,
-            'path' => Storage::disk('public')->put("/$user", $file),
-            'ext' => $file->getClientOriginalExtention(),
+            'path' => Storage::disk('public')->put("/$user/$name", $file),
+            'ext' => $file->clientExtension(),
             'userid' => $user
         ]);
 
         return redirect("dashboard");
     }
+
 }

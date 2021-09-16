@@ -28,8 +28,7 @@ Route::get('/carica', function() {
     return view('carica');
 })->middleware('can:podcaster')->name('carica');
 
-Route::post('/carica', [PodcastController::class, 'carica']);
+Route::post('/carica', [PodcastController::class, 'carica'])->name('carica');
+Route::view('/profile', 'profile')->name('profile');
 
-Route::get('/profile', function(){
-    return view('profile');
-})->name('profile');
+
