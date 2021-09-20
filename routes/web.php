@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PodcastController;
+use App\Models\Podcast;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +32,10 @@ Route::get('/carica', function() {
 })->middleware('can:podcaster')->name('carica');
 
 Route::post('/carica', [PodcastController::class, 'carica'])->name('carica');
-Route::view('/profile', 'profile')->name('profile');
+Route::view('/profile/{id}', 'profile')->name('profile');
+Route::get('/user/{id}', [PodcastController::class, 'view'])->name('user');
+Route::get('image', function(){
+    return Storage::disk('public')->get('profile-photos/N29NAvksLYrSwlgGyUr6V6VHoDUwxscB6PyiDXBq.png');
+});
 
 

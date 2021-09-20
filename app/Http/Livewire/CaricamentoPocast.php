@@ -18,7 +18,7 @@ class CaricamentoPocast extends Component
     public function handler()
     {
         $data = $this->validate([
-            'file' => 'required',
+            'file' => 'required|file',
             'name' => 'required',
             'descrizione' => 'required',
         ]);

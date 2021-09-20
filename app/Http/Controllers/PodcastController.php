@@ -22,7 +22,7 @@ class PodcastController extends Controller
         Podcast::create([
             "name" => $name,
             "description" => $descrizione,
-            'path' => Storage::disk('public')->put("/$user/$name", $file),
+            'path' => Storage::disk('public')->put("/$user", $file),
             'ext' => $file->clientExtension(),
             'userid' => $user
         ]);
@@ -30,4 +30,8 @@ class PodcastController extends Controller
         return redirect("dashboard");
     }
 
+    function view($id)
+    {
+        return redirect("profile/$id");
+    }
 }
