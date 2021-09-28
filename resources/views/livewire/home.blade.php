@@ -1,5 +1,22 @@
-<div class="container">
+<div class="container" style="display: flex; flex-wrap: wrap;">
  @foreach ($user as $u)
-    <h3><a href="user/{{$u->id}}"><img src="{{Storage::url($u->profile_photo_path)}}" alt="{{$u->name}}" class="rounded-full h-20 w-20 object-cover"></a></h3><br>
+ <div style="margin-right: 5%;  margin-top: 5%; margin-bottom: 5%;width: 20%; height: auto;" >
+    <div class="row">
+        <div class="col">
+            <a href="user/{{$u->id}}"><img src="{{Storage::url($u->profile_photo_path)}}" alt="{{$u->name}}"></a>
+        </div>
+        <div class="col">
+            <div class="row">
+                <h5>{{$u->name}}</h5>
+            </div>
+            <div class="row">
+                <p>descrizione</p>
+            </div>
+        </div>
+    </div>
+
+
+ </div>
+
  @endforeach
 </div>
