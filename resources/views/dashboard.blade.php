@@ -1,16 +1,23 @@
 <x-app-layout>
-    {{-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot> --}}
+    <div class="container" style="display: flex; flex-wrap: wrap;">
+        @foreach ($user as $u)
+        <div style="margin-right: 5%;  margin-top: 5%; margin-bottom: 5%;width: 20%; height: auto;" >
+           <div class="row">
+               <div class="col">
+                   <a href="profile/{{$u->id}}"><img src="{{Storage::url($u->profile_photo_path)}}" alt="{{$u->name}}"></a>
+               </div>
+               <div class="col">
+                   <div class="row">
+                       <h5>{{$u->name}}</h5>
+                   </div>
+                   <div class="row">
+                       <p>descrizione</p>
+                   </div>
+               </div>
+           </div>
 
-    @livewire('home')
-    {{-- <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-jet-welcome />
-            </div>
+
         </div>
-    </div> --}}
+
+        @endforeach
 </x-app-layout>

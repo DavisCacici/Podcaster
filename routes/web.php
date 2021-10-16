@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PodcastController;
 use App\Models\Podcast;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +25,8 @@ Route::get('/', function () {
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    $user = User::where('roleid','=','2')->get();
+    return view('dashboard', compact('user'));
 })->name('dashboard');
 
 Route::get('/carica', function() {
@@ -32,9 +34,10 @@ Route::get('/carica', function() {
 })->middleware('can:podcaster')->name('carica');
 
 Route::post('/carica', [PodcastController::class, 'carica']);
-Route::view('/profile/{id}', 'profile')->name('profile');
-Route::put("/profile/{id}", [PodcastController::class, 'edit'])->middleware("can:podcaster");
-Route::get('/user/{id}', [PodcastController::class, 'view'])->name('user');
+Route::get('/profile/{id}', [PodcastController::class, 'view'])->name('profile');
+Route::put("/profile/{id}", [PodcastController::class, 'edit']);
+Route::get("/profile/{id}/{path}", [PodcastController::class, 'delete']);
+// Route::get('/user/{id}', [PodcastController::class, 'view'])->name('user');
 
 
 

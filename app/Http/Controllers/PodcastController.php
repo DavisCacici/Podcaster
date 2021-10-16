@@ -12,8 +12,6 @@ use Illuminate\Http\UploadedFile;
 
 class PodcastController extends Controller
 {
-    //
-
     function carica(Request $request)
     {
         $user = Auth::id();
@@ -33,25 +31,27 @@ class PodcastController extends Controller
 
     function view($id)
     {
-        return redirect("profile/$id");
+        $user = User::find($id);
+        $file = Podcast::where('userid', $id)->get();
+        return view("profile", compact('file', 'user'));
     }
 
     function edit(Request $request, $id)
     {
-    //     $validator = Validator::make($request->all(), [
-    //         'name' => 'required|max:255',
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return redirect("profile/$id")
-    //                     ->withErrors($validator)
-    //                     ->withInput();
-    //     }
         $update = Podcast::find($id);
         $update->update([
             'name' => $request->input('name'),
             'description' => $request->input("description"),
         ]);
-        return redirect("profile/$id")->with('mess', 'aggiornamento riuscito');
+        return redirect("/profile/$id")->with('mess', 'aggiornamento riuscito');
+    }
+
+    function delete($id, $path)
+    {
+        $podacst = Podcast::find($id);
+        $podacst->delete();
+        Storage::disk('public')->delete($path);
+        $auth = Auth::id();
+        return redirect("/profile/$auth");
     }
 }
