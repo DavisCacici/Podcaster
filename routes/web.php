@@ -31,8 +31,9 @@ Route::get('/carica', function() {
     return view('carica');
 })->middleware('can:podcaster')->name('carica');
 
-Route::post('/carica', [PodcastController::class, 'carica'])->name('carica');
+Route::post('/carica', [PodcastController::class, 'carica']);
 Route::view('/profile/{id}', 'profile')->name('profile');
+Route::put("/profile/{id}", [PodcastController::class, 'edit'])->middleware("can:podcaster");
 Route::get('/user/{id}', [PodcastController::class, 'view'])->name('user');
 
 

@@ -1,4 +1,5 @@
 <div class="container" style="display: flex; flex-direction: column;">
+
     @foreach ($file as $f)
     <div class="row">
         <div class="col">
@@ -27,7 +28,23 @@
                         </button>
                         </div>
                         <div class="modal-body">
-                            @livewire('modal', ['file' => $f])
+                            {{-- @livewire('modal', ['file' => $f]) --}}
+                            <form action="" method="PUT">
+                                @csrf
+                                @method('PUT')
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Nome:</label>
+                                    <input type="text" name='name' class="form-control" id="recipient-name">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Descrizione:</label>
+                                    <textarea class="form-control" id="message-text" name='descrizione' ></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" data-dismiss="modal">Salva</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     </div>

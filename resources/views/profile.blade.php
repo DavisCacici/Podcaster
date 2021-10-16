@@ -12,6 +12,11 @@
   </head>
   <body>
     {{-- @livewire('navigation-menu') --}}
+    @if( isset($mess))
+    <div class="alert alert-success" role="alert">
+        {{$mess}}
+      </div>
+    @endif
     @livewire('profilelive')
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
