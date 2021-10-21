@@ -34,10 +34,9 @@ Route::get('/carica', function() {
 })->middleware('can:podcaster')->name('carica');
 
 Route::post('/carica', [PodcastController::class, 'carica']);
-Route::get('/profile/{id}', [PodcastController::class, 'view'])->name('profile');
-Route::put("/profile/{id}", [PodcastController::class, 'edit']);
-Route::get("/profile/{id}/{path}", [PodcastController::class, 'delete']);
-// Route::get('/user/{id}', [PodcastController::class, 'view'])->name('user');
+Route::get('/profile/{id}', [PodcastController::class, 'show'])->name('profile');
+Route::put("/profile/{id}", [PodcastController::class, 'update']);
+Route::delete("/profile/{fileid}", [PodcastController::class, 'destroy']);
 
 
 

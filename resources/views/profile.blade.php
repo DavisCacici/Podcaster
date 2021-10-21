@@ -14,6 +14,11 @@
     {{-- @livewire('navigation-menu') --}}
 
     <div class="container" style="display: flex; flex-direction: column;">
+        @if($mess)
+        <div class="alert alert-success" role="alert">
+            {{$mess}}
+        </div>
+        @endif
         <img src="{{Storage::url($user->profile_photo_path)}}" alt="Foto profilo" width="100px" height="100px">
         @foreach ($file as $f)
         <div class="row">
@@ -23,8 +28,9 @@
             <div class="col" style="margin-left: 80%; margin-top: 2%">
                 <div class="row">
                     @if($f->userid == Auth::id())
-                    <form method="GET" action="/profile/{{$f->id}}/{{$f->path}}">
+                    <form method="POST" action="/profile/{{$f->id}}">
                         @csrf
+                        @method('DELETE')
                         <button type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
                         </button>

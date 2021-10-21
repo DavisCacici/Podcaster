@@ -12,7 +12,28 @@
   </head>
   <body>
     {{-- @livewire('navigation-menu') --}}
-    @livewire('caricamento-pocast')
+    <div class="container">
+        {{-- Care about people's approval and you will be their prisoner. --}}
+        <h1>Benvenuto podcaster</h1><br>
+        <h3>Qui potrai caricare le puntate del tuo podcast</h3><br>
+        <form action="/carica" method="post" enctype="multipart/form-data">
+            @csrf
+            <label for="name">Nome: </label>
+            <input type="text" id="name" name="pod['name']">
+            <small class="error">{{ $errors->first('pod.name')}}</small>
+            <br>
+            <label for="file">Carica il tuo episodio: </label>
+            <input type="file" name="pod['file']" id="file"/>
+            <small class="error">{{ $errors->first('pod.file') }}</small>
+            <br>
+            <label for="descrizione">Descrivi brevemente o aggiungi dei link:</label><br>
+            <textarea name="pod['description']" id="descrizione" cols="30" rows="10"></textarea>
+            {{-- <small class="error">{{$error->first('pod.name')}}</small> --}}
+            <br><br>
+            <button type="submit" class="btn btn-primary">  Carica  </button>
+
+        </form>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     @livewireScripts
