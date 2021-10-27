@@ -13,6 +13,11 @@
   <body>
     {{-- @livewire('navigation-menu') --}}
     <div class="container">
+        @if(session('mess'))
+        <div class="alert alert-success" role="alert">
+            {{session('mess')}}
+        </div>
+        @endif
         {{-- Care about people's approval and you will be their prisoner. --}}
         <h1>Benvenuto podcaster</h1><br>
         <h3>Qui potrai caricare le puntate del tuo podcast</h3><br>

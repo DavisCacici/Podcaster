@@ -52,8 +52,7 @@ class PodcastController extends Controller
     {
         $user = User::find($id);
         $file = Podcast::where('userid', $id)->get();
-        $mess = "";
-        return view("profile", compact('file', 'user', 'mess'));
+        return view("profile", compact('file', 'user'));
     }
 
     /**
@@ -98,14 +97,15 @@ class PodcastController extends Controller
         Storage::disk('public')->delete($podacst->path);
         $podacst->delete();
         $auth = Auth::id();
-        return redirect("/profile/$auth");
+        return redirect("/profile/$auth")->with('destroy', 'distrutto');
     }
 
     function carica(RequestPodcast $request)
     {
-        // dd($request->all());
+        // dd($request->file('file'));
         $user = Auth::id();
         $file = $request->file('file');
+        $origin = $file->getClientOriginalName();
         $descrizione = $request->input('description');
         $name = $request->input('name');
         Podcast::create([
@@ -115,8 +115,7 @@ class PodcastController extends Controller
             'ext' => $file->clientExtension(),
             'userid' => $user
         ]);
-
-        return redirect("carica");
+        return redirect("carica")->with('mess', "caricato con successo");
     }
 }
 

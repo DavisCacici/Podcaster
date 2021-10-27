@@ -14,12 +14,17 @@
     {{-- @livewire('navigation-menu') --}}
 
     <div class="container" style="display: flex; flex-direction: column;">
-        @if($mess)
+        @if(session('mess'))
         <div class="alert alert-success" role="alert">
-            {{$mess}}
+            {{session('mess')}}
         </div>
         @endif
-        <img src="{{Storage::url($user->profile_photo_path)}}" alt="Foto profilo" width="100px" height="100px">
+        @if(session('destroy'))
+        <div class="alert alert-danger" role="alert">
+            {{session('destroy')}}
+        </div>
+        @endif
+        <img src="{{Storage::url("$user->profile_photo_path")}}" alt="{{$user->name}}" width="100px" height="100px">
         @foreach ($file as $f)
         <div class="row">
             <div class="col-8 col-md-10">
@@ -83,6 +88,7 @@
             <source src="{{Storage::url($f->path)}}" type="audio/mp3">
             </audio>
             <p>{{$f->description}}</p>
+
         @endforeach
     </div>
     <!-- Optional JavaScript -->

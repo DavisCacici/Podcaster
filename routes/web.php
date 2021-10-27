@@ -30,14 +30,24 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::get('/carica', function() {
-    return view('carica');
+    $mess = null;
+    return view('carica', compact('mess'));
 })->middleware('can:podcaster')->name('carica');
 
 Route::post('/carica', [PodcastController::class, 'carica']);
-Route::get('/profile/{id}', [PodcastController::class, 'show'])->name('profile');
+Route::get('/profile/{id}', [PodcastController::class, 'show']);
 Route::put("/profile/{id}", [PodcastController::class, 'update']);
 Route::delete("/profile/{fileid}", [PodcastController::class, 'destroy']);
-
+Route::get('/download', function(){
+    $f = Podcast::find('23');
+    if(Storage::disk('public')->exists($f->path))
+    {
+        return Storage::disk('public')->download("$f->path");
+    }
+    else{
+        return response('nada');
+    }
+});
 
 
 
