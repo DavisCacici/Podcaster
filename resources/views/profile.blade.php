@@ -1,6 +1,6 @@
 <x-app-layout>
 <!doctype html>
-<html lang="en">
+<html lang="it">
   <head>
     <title>Title</title>
     <!-- Required meta tags -->
@@ -85,7 +85,6 @@
             <p>{{$f->description}}</p>
         @endforeach
     </div>
-    {{-- @livewire('profilelive') --}}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     @livewireScripts
