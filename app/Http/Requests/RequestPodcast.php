@@ -24,17 +24,19 @@ class RequestPodcast extends FormRequest
     public function rules()
     {
         return [
-            'pod.name' => 'required',
-            'pod.file' => 'required|file',
+            'name' => 'required',
+            'file' => 'required|file',
+            'description' => 'max:191'
         ];
     }
 
     public function messages()
     {
         return [
-            'pod.name.required' => 'Il campo nome è obbligatorio',
-            'pod.file.required' => 'Non hai inserito nessun file',
-            'pod.file.file' => 'Devi inserire il file'
+            'name.required' => 'Il campo nome è obbligatorio',
+            'file.required' => 'Non hai inserito nessun file',
+            'file.file' => 'Devi inserire il file',
+            'description.max' => 'hai superato la lunghezza massima'
         ];
     }
 }

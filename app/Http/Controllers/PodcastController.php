@@ -101,13 +101,13 @@ class PodcastController extends Controller
         return redirect("/profile/$auth");
     }
 
-    function carica(Request $request)
+    function carica(RequestPodcast $request)
     {
-        dd($request->file('pod'));
+        // dd($request->all());
         $user = Auth::id();
-        $file = $request->file('pod.file');
-        $descrizione = $request->input('pod.description');
-        $name = $request->input('pod.name');
+        $file = $request->file('file');
+        $descrizione = $request->input('description');
+        $name = $request->input('name');
         Podcast::create([
             "name" => $name,
             "description" => $descrizione,

@@ -19,16 +19,16 @@
         <form action="/carica" method="post" enctype="multipart/form-data">
             @csrf
             <label for="name">Nome: </label>
-            <input type="text" id="name" name="pod['name']">
-            <small class="error">{{ $errors->first('pod.name')}}</small>
+            <input type="text" id="name" name="name">
+            <small class="error">{{ $errors->first('name')}}</small>
             <br>
             <label for="file">Carica il tuo episodio: </label>
-            <input type="file" name="pod['file']" id="file"/>
-            <small class="error">{{ $errors->first('pod.file') }}</small>
+            <input type="file" name="file" id="file"/>
+            <small class="error">{{ $errors->first('file') }}</small>
             <br>
             <label for="descrizione">Descrivi brevemente o aggiungi dei link:</label><br>
-            <textarea name="pod['description']" id="descrizione" cols="30" rows="10"></textarea>
-            {{-- <small class="error">{{$error->first('pod.name')}}</small> --}}
+            <textarea name="description" id="descrizione" cols="30" rows="10"></textarea>
+            <small class="error">{{$errors->first('description')}}</small>
             <br><br>
             <button type="submit" class="btn btn-primary">  Carica  </button>
 
