@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,15 +39,10 @@ Route::post('/carica', [PodcastController::class, 'carica']);
 Route::get('/profile/{id}', [PodcastController::class, 'show']);
 Route::put("/profile/{id}", [PodcastController::class, 'update']);
 Route::delete("/profile/{fileid}", [PodcastController::class, 'destroy']);
-Route::get('/download', function(){
-    $f = Podcast::find('23');
-    if(Storage::disk('public')->exists($f->path))
-    {
-        return Storage::disk('public')->download("$f->path");
-    }
-    else{
-        return response('nada');
-    }
+Route::post('/download', function(Request $request){
+    // dd($request->input('path'));
+    $path = $request->input('path');
+    return Storage::disk('public')->download($path);
 });
 
 

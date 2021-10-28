@@ -23,18 +23,21 @@
         <h3>Qui potrai caricare le puntate del tuo podcast</h3><br>
         <form action="/carica" method="post" enctype="multipart/form-data">
             @csrf
-            <label for="name">Nome: </label>
-            <input type="text" id="name" name="name">
-            <small class="error">{{ $errors->first('name')}}</small>
-            <br>
-            <label for="file">Carica il tuo episodio: </label>
-            <input type="file" name="file" id="file"/>
-            <small class="error">{{ $errors->first('file') }}</small>
-            <br>
-            <label for="descrizione">Descrivi brevemente o aggiungi dei link:</label><br>
-            <textarea name="description" id="descrizione" cols="30" rows="10"></textarea>
-            <small class="error">{{$errors->first('description')}}</small>
-            <br><br>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Nome</label>
+                <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">{{ $errors->first('name')}}</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Carica il tuo episodio</label>
+                <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1" aria-describedby="fileError">
+                <small id='fileError' class="form-text text-muted">{{ $errors->first('file') }}</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Descrivi o aggiungi dei link</label>
+                <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" aria-describedby="textError"></textarea>
+                <small id="textError" class="form-text text-muted">{{$errors->first('description')}}</small>
+            </div>
             <button type="submit" class="btn btn-primary">  Carica  </button>
 
         </form>
