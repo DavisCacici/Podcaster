@@ -16,9 +16,11 @@ class PodcastController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $user = User::find($id);
+        $file = Podcast::where('userid', $id)->get();
+        return view("profile", compact('file', 'user'));
     }
 
     /**
@@ -50,9 +52,9 @@ class PodcastController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        $file = Podcast::where('userid', $id)->get();
-        return view("profile", compact('file', 'user'));
+        $podcast = Podcast::where('id', $id)->get();
+        // dd($podcast);
+        return view('profileShow', compact('podcast'));
     }
 
     /**
@@ -76,13 +78,33 @@ class PodcastController extends Controller
     public function update(Request $request, $id)
     {
         $update = Podcast::find($id);
-
-        $update->update([
-            'name' => $request->input('name'),
-            'description' => $request->input("description"),
-        ]);
         $user = Auth::id();
-        return redirect("/profile/$user")->with('mess', 'aggiornamento riuscito');
+        // dd($user);
+        $name = $request->input('name');
+        $description = $request->input('description');
+
+        if($name == null )
+        {
+            $update->update([
+                'description' => $description,
+            ]);
+            return redirect("/profile/$user")->with('mess', 'aggiornamento riuscito');
+        }
+        elseif($description == null )
+        {
+            $update->update([
+                'name' => $name,
+            ]);
+            return redirect("/profile/$user")->with('mess', 'aggiornamento riuscito');
+        }
+        else
+        {
+            $update->update([
+                'name' => $name,
+                'description' => $description,
+            ]);
+            return redirect("/profile/$user")->with('mess', 'aggiornamento riuscito');
+        }
     }
 
     /**
@@ -102,10 +124,9 @@ class PodcastController extends Controller
 
     function carica(RequestPodcast $request)
     {
-        // dd($request->file('file'));
         $user = Auth::id();
         $file = $request->file('file');
-        $origin = $file->getClientOriginalName();
+        // $origin = $file->getClientOriginalName();
         $descrizione = $request->input('description');
         $name = $request->input('name');
         Podcast::create([
@@ -116,6 +137,12 @@ class PodcastController extends Controller
             'userid' => $user
         ]);
         return redirect("carica")->with('mess', "caricato con successo");
+    }
+
+    public function download(Request $request)
+    {
+        $path = $request->input('path');
+        return Storage::disk('public')->download($path);
     }
 }
 

@@ -1,8 +1,11 @@
 <?php
 
 use App\Models\Podcast;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +18,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group( function(){
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
 
 Route::get('/test', function(){
-    $a = array('response' => 'tutto ok');
-    return json_encode(Podcast::all());
+    return response(Podcast::all());
 });
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);

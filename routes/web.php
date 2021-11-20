@@ -36,14 +36,11 @@ Route::get('/carica', function() {
 })->middleware('can:podcaster')->name('carica');
 
 Route::post('/carica', [PodcastController::class, 'carica']);
-Route::get('/profile/{id}', [PodcastController::class, 'show']);
+Route::get('/profile/{id}/show', [PodcastController::class, 'show']);
+Route::get('/profile/{id}', [PodcastController::class, 'index']);
 Route::put("/profile/{id}", [PodcastController::class, 'update']);
 Route::delete("/profile/{fileid}", [PodcastController::class, 'destroy']);
-Route::post('/download', function(Request $request){
-    // dd($request->input('path'));
-    $path = $request->input('path');
-    return Storage::disk('public')->download($path);
-});
+Route::post('/download', [PodcastController::class, 'download']);
 
 
 

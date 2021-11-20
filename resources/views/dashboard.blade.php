@@ -8,7 +8,7 @@
                </div>
                <div class="col">
                    <div class="row">
-                       <h5>{{$u->name}}</h5>
+                    <a href="profile/{{$u->id}}"><h5>{{$u->name}}</h5></a>
                    </div>
                    <div class="row">
                        <p>descrizione</p>

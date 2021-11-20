@@ -19,7 +19,7 @@ class CreatePodcastsTable extends Migration
             $table->string("description");
             $table->string("ext");
             $table->string("path");
-            $table->foreignId("userid")->constrained("user"); 
+            $table->foreignId("userid")->constrained("users");
             $table->timestamps();
         });
     }
